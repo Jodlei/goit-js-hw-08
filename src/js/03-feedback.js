@@ -16,7 +16,7 @@ setDataOnLocalStorage();
 
 function onFormSubmit(evt) {
   evt.preventDefault();
-  evt.target.reset();
+  evt.currentTarget.reset();
   localStorage.removeItem(STORAGE_KEY);
 }
 
