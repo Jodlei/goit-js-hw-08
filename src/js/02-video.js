@@ -5,15 +5,19 @@ const iframe = document.querySelector('iframe');
 const player = new Player(iframe);
 
 const onPlay = function (data) {
-  localStorage.setItem('videoplayer-current-time', JSON.stringify(data));
+  if (data) {
+    localStorage.setItem('videoplayer-current-time', JSON.stringify(data));
+  }
 };
 
 player.on('timeupdate', throttle(onPlay, 1000));
 
 const parseObj = JSON.parse(localStorage.getItem('videoplayer-current-time'));
+let time = 0;
+if (parseObj) {
+  time = parseObj.seconds;
+}
 
-const time = parseObj.seconds;
-console.log(time);
 player
   .setCurrentTime(time)
   .then(function (seconds) {})
@@ -21,10 +25,19 @@ player
     switch (error.name) {
       case 'RangeError':
         break;
-
       default:
         break;
     }
   });
 
-// player.setCurrentTime(time);
+// це все що нижче можна прибрати?
+
+// .then(function (seconds) {})
+// .catch(function (error) {
+//   switch (error.name) {
+//     case 'RangeError':
+//       break;
+//     default:
+//       break;
+//   }
+// });
