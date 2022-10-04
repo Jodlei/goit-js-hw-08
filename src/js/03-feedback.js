@@ -15,14 +15,14 @@ refs.form.addEventListener('input', throttle(onInput, 500));
 setDataOnLocalStorage();
 
 function onFormSubmit(evt) {
+  evt.preventDefault();
+  console.log(savedData);
+
   if (refs.email.value === '' || refs.textarea.value === '') {
     return alert('Потрібно заповнити всі поля!');
   } else {
-    evt.preventDefault();
     evt.currentTarget.reset();
     localStorage.removeItem(STORAGE_KEY);
-
-    console.log(savedData);
   }
 }
 
